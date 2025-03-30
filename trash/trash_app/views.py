@@ -1,17 +1,15 @@
 from django.shortcuts import render
-from time import sleep
-import os
 from inference_sdk import InferenceHTTPClient
 import cv2
 from time import sleep
 import os
 
 try:
-   os.remove("./static/frame.jpg")
+   os.remove("./trash_app/static/frame.jpg")
 except:
    pass
 try:
-   os.remove("./static/photo.jpg")
+   os.remove("./trash_app/static/photo.jpg")
 except:
    pass
 
@@ -28,8 +26,6 @@ prev_items = []
 global prev_output
 prev_output = ""
 
-
-
 def main():
    output=""
    global prev_items
@@ -40,19 +36,21 @@ def main():
       cv2.imwrite("./trash_app/static/frame.jpg", cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE))
       sleep(0.1)
       result = CLIENT.infer("./trash_app/static/frame.jpg", model_id="trashclass-zuu3r/1")
+      print(result)
       if result["predictions"]:
          items = []
          res = result["predictions"]
          for obj in res:
-            items.append(obj["class"])
-            if obj["class"] not in prev_items:
-               if obj["class"] not in COMPOST:
-                  output = "You put %s into compost, which should go in the recycle!" % obj["class"]
-                  cam = cv2.VideoCapture(0)
-                  s, img = cam.read()
-                  if s:
-                     cv2.imwrite("./trash_app/static/photo.jpg", img)
-         # print(items)
+            if obj["confidence"] > 0.5:
+               items.append(obj["class"])
+               if obj["class"] not in prev_items:
+                  if obj["class"] not in COMPOST:
+                     output = "You put %s into compost, which should go in the recycle!" % obj["class"]
+                     cam = cv2.VideoCapture(0)
+                     s, img = cam.read()
+                     if s:
+                        cv2.imwrite("./trash_app/static/photo.jpg", img)
+         print(items)
          prev_items = items
    return output
 

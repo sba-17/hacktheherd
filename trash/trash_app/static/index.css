@@ -1,0 +1,128 @@
+/* ---------- COLORS & VARIABLES ---------- */
+:root {
+  --main-purple: hsl(267 56% 27%); /* Adjust if you want a different shade */
+  --light-gray: #f8f9fa;
+  --white: #ffffff;
+  --dark-text: #333333;
+  --success-green: #28a745; /* For "Connected" status */
+}
+
+/* ---------- GLOBAL STYLES ---------- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-purple);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: var(--dark-text);
+  box-sizing: border-box;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  background-color: var(--main-purple);
+}
+.navbar-brand,
+.nav-link,
+.navbar-text {
+  color: var(--white) !important;
+}
+.btn-captured-images {
+  border: 2px solid var(--white);
+  color: var(--white);
+  margin-right: 1rem;
+}
+.btn-captured-images:hover {
+  background-color: var(--white);
+  color: var(--main-purple);
+}
+
+/* ---------- STATUS BADGE ---------- */
+.status-badge {
+  display: inline-block;
+  background-color: var(--success-green);
+  color: var(--white);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 1rem;
+}
+
+/* ---------- HEADER SECTION ---------- */
+.header-section {
+  background-color: var(--main-purple);
+  color: var(--white);
+  padding: 2rem;
+  text-align: center;
+}
+.header-section h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- EYES & WARNING SECTION ---------- */
+.warning-section {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--white);
+  margin-top: -1rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.warning-section h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+/* ---------- ACCEPTABLE ITEMS SECTION ---------- */
+.acceptable-items {
+  background-color: var(--white);
+  border: 2px solid var(--main-purple);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 600px;
+}
+.acceptable-items h3 {
+  color: var(--main-purple);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.acceptable-items ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+/* ---------- EYES & WARNING SECTION ---------- */
+.warning-section {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--white);
+  margin-top: -1rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.eyes-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.warning-section h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+main{
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.ai-message{
+    color:red;
+}

@@ -2,13 +2,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p id="text"></p>
-    <img id="myImage" src="{% static 'photo.jpg' %}" alt="" width="300">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Waste Management System</title>
 
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+    <link
+        rel="stylesheet"
+        href={% static "index.css"%}
+    />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">
+        Waste Management System
+      </a>
+      <div class="d-flex">
+        <!-- Status badge -->
+        <span class="status-badge">Connected</span>
+        <!-- Captured Images Button -->
+        {% comment %} <button class="btn btn-captured-images" type="button">
+          Captured Images
+        </button> {% endcomment %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER / TITLE SECTION -->
+  <div class="header-section">
+    <h1>Compost Bin Monitoring</h1>
+  </div>
+
+
+  <main>
+  <!-- ACCEPTABLE ITEMS LIST -->
+    <div class="acceptable-items">
+    <h3>Acceptable Items</h3>
+        <ul>
+          <li>Food scraps</li>
+          <li>Fruit and vegetable peels</li>
+          <li>Paper towels (unsoiled)</li>
+          <li>Leaves and grass</li>
+          <li>Coffee grounds</li>
+          <li>Eggshells</li>
+          <li>Yard trimmings</li>
+          <li>Paper bags (unlined)</li>
+        </ul>
+   </div>
+    <!-- WARNING / EYES SECTION -->
+    <div class="warning-section">
+        <div class="eyes-container">
+            <img
+                id="myImage"
+                src="{% static 'eyes.gif' %}"
+                alt="Eyes"
+                class="eyes-image"
+                width="550"
+                height="400"
+            />
+        </div>
+        <h2 id="text">Be careful not to put non-compostable trash here!</h2>
+        <h2>We are watching you</h2>
+    </div>
+    <!-- UNACCEPTABLE ITEMS LIST-->
+    <div class="acceptable-items">
+        <h3>Unacceptable Items</h3>
+        <ul>
+          <li>Meat and fish scraps</li>
+          <li>Dairy products</li>
+          <li>Oils and fats</li>
+          <li>Plastic bags</li>
+          <li>Non-compostable paper (e.g., waxed paper)</li>
+          <li>Pet waste</li>
+          <li>Diseased plants</li>
+          <li>Coal or charcoal ash</li>
+        </ul>
+    </div>
+  </main>
+
+    <!-- UNACCEPTABLE ITEMS LIST -->
+    {% comment %} <p id="text"></p>
+    <img id="myImage" src="{% static 'photo.jpg' %}" alt="" width="300"> {% endcomment %}
+  <!-- Bootstrap JS (Optional for basic layout, but needed for advanced components) -->
+<!--  <script src={% static 'index.js' %}></script>-->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+  </script>
 </body>
 <script>
     const output = document.getElementById("text");
@@ -27,6 +114,7 @@
                 if (response.text !== res) {
                     res = response.text;
                     output.innerHTML = res;
+                    output.classList.add("ai-message");
                     iteration = 0;
                 }
 

@@ -25,9 +25,9 @@ def main():
    ret, frame = cap.read()
 
    if ret:
-      cv2.imwrite("frame.jpg", cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE))
+      cv2.imwrite("./trash_app/static/frame.jpg", cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE))
       sleep(0.1)
-      result = CLIENT.infer("frame.jpg", model_id="trashclass-zuu3r/1")
+      result = CLIENT.infer("./trash_app/static/frame.jpg", model_id="trashclass-zuu3r/1")
       if result["predictions"]:
          items = []
          res = result["predictions"]

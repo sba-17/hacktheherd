@@ -5,6 +5,7 @@ import cv2
 from time import sleep
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.response import Response
+import playsound
 
 COMPOST = ["BIODEGRADABLE","CARDBOARD","PAPER"]
 RECYCLABLE = ["GLASS","METAL","PLASTIC"]
@@ -38,11 +39,14 @@ def main():
                items.append(obj["class"])
                if obj["class"] not in prev_items:
                   if obj["class"] not in COMPOST:
-                     output = "You put %s into compost, which should go in the recycle!" % obj["class"]
+                     playsound.playsound("./sound-effect.mp3", False)
+                     output = "You put a %s into compost! Please move it to the recycle!" % obj["class"].lower()
                      cam = cv2.VideoCapture(0)
                      s, img = cam.read()
                      if s:
                         cv2.imwrite("./trash_app/static/photo.jpg", img)
+                  if obj["class"] in COMPOST:
+                     output = "Good job! You put a %s into compost!" % obj["class"].lower()
          print(items)
          prev_items = items
    return output

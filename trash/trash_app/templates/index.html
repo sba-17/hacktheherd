@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Waste Management System</title>
+  <title>Incorrect Waste Classification Warning System</title>
 
   <!-- Bootstrap CSS -->
   <link
@@ -38,7 +38,7 @@
 
   <!-- HEADER / TITLE SECTION -->
   <div class="header-section">
-    <h1>Compost Bin Monitoring</h1>
+    <h1>Busted!</h1>
   </div>
 
 
@@ -50,10 +50,8 @@
           <li>Food scraps</li>
           <li>Fruit and vegetable peels</li>
           <li>Paper towels (unsoiled)</li>
-          <li>Leaves and grass</li>
           <li>Coffee grounds</li>
           <li>Eggshells</li>
-          <li>Yard trimmings</li>
           <li>Paper bags (unlined)</li>
         </ul>
    </div>
@@ -70,7 +68,7 @@
             />
         </div>
         <h2 id="text">Be careful not to put non-compostable trash here!</h2>
-        <h2>We are watching you</h2>
+        <h2>We are watching you!</h2>
     </div>
     <!-- UNACCEPTABLE ITEMS LIST-->
     <div class="acceptable-items">
@@ -81,9 +79,6 @@
           <li>Oils and fats</li>
           <li>Plastic bags</li>
           <li>Non-compostable paper (e.g., waxed paper)</li>
-          <li>Pet waste</li>
-          <li>Diseased plants</li>
-          <li>Coal or charcoal ash</li>
         </ul>
     </div>
   </main>
@@ -111,16 +106,22 @@
             .then((response) => response.json())
             .then(response => {
                 // Update text if it has changed
-                if (response.text !== res) {
+                if (response.text !== res && response.text.includes("Please")) {
                     res = response.text;
                     output.innerHTML = res;
                     output.classList.add("ai-message");
                     iteration = 0;
-                }
 
-                // Refresh the image by updating the `src` with a timestamp to avoid caching
-                const timestamp = new Date().getTime();  // Unique timestamp for cache busting
-                image.src = "{% static 'photo.jpg' %}?timestamp=" + timestamp;
+                    // Refresh the image by updating the `src` with a timestamp to avoid caching
+                    const timestamp = new Date().getTime();  // Unique timestamp for cache busting
+                    image.src = "{% static 'photo.jpg' %}?timestamp=" + timestamp;
+                }
+                else if (response.text !== res && response.text.includes("Good")) {
+                    res = response.text;
+                    output.innerHTML = res;
+                    output.classList.add("good-message");
+                    iteration = 0;
+                }
 
             }).catch(error => console.error('Error fetching data:', error));
 

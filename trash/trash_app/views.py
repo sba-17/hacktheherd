@@ -3,6 +3,7 @@ from inference_sdk import InferenceHTTPClient
 import cv2
 from time import sleep
 import os
+import playsound
 
 try:
    os.remove("./trash_app/static/frame.jpg")
@@ -45,12 +46,15 @@ def main():
                items.append(obj["class"])
                if obj["class"] not in prev_items:
                   if obj["class"] not in COMPOST:
-                     output = "You put %s into compost, which should go in the recycle!" % obj["class"]
+                     # playsound.playsound("./sound-effect.mp3", False)
+                     output = "You put a %s into compost! Please move it to the recycle!" % obj["class"].lower()
                      cam = cv2.VideoCapture(0)
                      s, img = cam.read()
                      if s:
                         cv2.imwrite("./trash_app/static/photo.jpg", img)
-         print(items)
+                  if obj["class"] in COMPOST:
+                     output = "Good job! You put a %s into compost!" % obj["class"].lower()
+            print(items)
          prev_items = items
    return output
 

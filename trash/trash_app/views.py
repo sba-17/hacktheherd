@@ -4,6 +4,16 @@ import os
 from inference_sdk import InferenceHTTPClient
 import cv2
 from time import sleep
+import os
+
+try:
+   os.remove("./static/frame.jpg")
+except:
+   pass
+try:
+   os.remove("./static/photo.jpg")
+except:
+   pass
 
 COMPOST = ["BIODEGRADABLE","CARDBOARD","PAPER"]
 RECYCLABLE = ["GLASS","METAL","PLASTIC"]
@@ -17,6 +27,8 @@ global prev_items
 prev_items = []
 global prev_output
 prev_output = ""
+
+
 
 def main():
    output=""
